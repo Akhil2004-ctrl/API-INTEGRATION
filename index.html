@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Integration Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    #output {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>API Integration Example</h2>
+  <button onclick="fetchData()">Get User Data</button>
+  <div id="output">Click the button to load data from API.</div>
+
+  <script>
+    function fetchData() {
+      fetch('https://jsonplaceholder.typicode.com/users/1')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('output').innerHTML = `
+            <strong>Name:</strong> ${data.name}<br>
+            <strong>Email:</strong> ${data.email}<br>
+            <strong>City:</strong> ${data.address.city}<br>
+            <strong>Company:</strong> ${data.company.name}
+          `;
+        })
+        .catch(error => {
+          document.getElementById('output').innerHTML = 'Error fetching data.';
+          console.error('Error:', error);
+        });
+    }
+  </script>
+
+</body>
+</html>
